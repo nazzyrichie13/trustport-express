@@ -1,0 +1,28 @@
+{
+  "name": "trustport-express-backend",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.15.1",
+    "nodemailer": "^7.0.3",
+    "socket.io": "^4.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nazzyrichie13/trustport-express.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nazzyrichie13/trustport-express/issues"
+  },
+  "homepage": "https://github.com/nazzyrichie13/trustport-express#readme",
+  "description": ""
+}
