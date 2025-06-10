@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>traxking page</title>
+    <link rel="stylesheet" href="/trustport-express-backend/public/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      .divItem {
+        display: none;
+      }
+    
+      .divItem.item {
+        display: block;
+      }
+    
+      .image-article img {
+        display: none;
+      }
+    </style>
+</head>
+<body>
+    
+    <div class="nav" style="display: flex; justify-content: space-between; background-color: cornsilk; padding: 10px 30px; align-items: center;">
+        <div class="design"
+        style="
+        color: rgb(65, 47, 79); font-style: italic; font-size: 25px; font-weight: 900; text-decoration: line-through;">
+            =TPE=
+        </div>
+        <div id="span_toggle"  style=" display: flex; flex-direction: column; gap: 4px; position: relative;"></span>
+            <span style="width: 25px; background-color: rgb(65, 47, 79); border: 1px; height: 3px; font-weight: 900;"></span>
+            <span style="width: 25px; background-color: rgb(65, 47, 79); border: 1px; height: 3px; font-weight: 900;"></span>
+            <span style="width: 25px; background-color: rgb(65, 47, 79); border: 1px; height: 3px; font-weight: 900;"></span>
+        </div>
+        <div id="navigate" class="navigate" >
+          
+            <a href="/trustport-express-backend/public/index.html">Home</a>
+            <a href="/trustport-express-backend/public/">Contact Us</a>
+            <a href="/trustport-express-backend/public/about .html">About Us</a>
+            <a href="/trustport-express-backend/public/faq.html">FAQ</a>
+            <button style="color: red; font-size: 17px ; font-weight: 900; border: none;" onclick="removeNav() ">x</button>
+        </div>
+    </div>
+   
+    
+  
+    <!-- end of nav -->
+     <a href="/trustport-express-backend/public/index.html" style="padding: 5px; background-color: chartreuse; color: white; max-width: 80px; border-radius: 50%; text-align: center;">Home</a>
+    <div style="display: flex; justify-content: center; flex-direction: column; padding: 20px 0; background-color: whitesmoke; align-items: center; gap: 40px;">
+        <div class="track">
+            <i class="fa-solid fa-truck"></i>
+            <P>TRACK</P>
+         </div>
+         <form   id="track-form">
+         <div class="trackerInput">
+            <input type="text" placeholder="TRACKING ID" id="trackingCode" name="trackingCode" required>
+        <button type="submit">TRACK -></button>
+         </div>
+         </form>
+    </div>
+     <div id="tracking-result"></div>
+    <div class="manageinput">
+        <div class="manageclass" >
+            <i class="fa-solid fa-truck-fast" style="font-size: 45px;"></i>
+            <a href="#">REDIRECT YOUR PACKAGE</a>
+        
+        </div>
+        <div class="manageclass">
+            
+            <i class="fa-solid fa-location-dot" style="font-size: 45px;"></i>
+            <a href="#">FIND LOCATIONS</a>
+        </div>
+        <div class="manageclass">
+        
+            
+            <i class="fa-solid fa-calendar" style="font-size: 45px;"></i>
+            <a href="/trustport-express-backend/public/track.html">SCHEDULE PICKUP</a>
+        </div>
+    </div>
+    
+<div id="chat-toggle" style="position: fixed; bottom: 20px; right: 20px; cursor: pointer;">
+  <i class="fas fa-paper-plane fa-2x"></i>
+</div>
+
+<!-- Chat Popup -->
+<div id="chat-box" style="position: fixed; bottom: 70px; right: 20px; width: 300px; max-height: 400px; background: white; border: 1px solid #ccc; padding: 10px; display: none;">
+  <div id="chat-messages" style="height: 300px; overflow-y: auto;"></div>
+  <form id="chat-form">
+    <input id="chat-input" type="text" placeholder="Type a message..." style="width: 80%;" />
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+    <footer >
+
+        <div class="foot" >
+          <div  style=" display: flex; flex-direction: column; background: rgba(255,255,255,0,1); backdrop-filter:blur(7px);  -webkit-backdrop-filter: blur(4px);  color: white  ; gap: 10px;">
+            <h3 style="text-decoration: underline; text-decoration-color: coral; text-decoration-thickness: 5px;">TRUSTPORT EXPRESS COURIER SERVICES</h3>
+            <p class="first_footer" style="width: 350px; ">Whatever the situation trustport express courier services will find a solution for delivery needs Fast, efficient and friendly your goods are in safe hands the moment they leave your premises</p>
+          </div>
+          <div class="footer_service" style="display: flex; flex-direction: column;     background: rgba(255,255,255,0,1); backdrop-filter:blur(7px);  -webkit-backdrop-filter: blur(4px);  color: whitesmoke; gap: 10px;  ">
+            <h3 style="text-decoration: underline; text-decoration-color: coral; text-decoration-thickness: 5px;">OUR SERVICES</h3>
+            <p>freight services</p>
+            <p>multmodal transport</p>
+            <p>warehousing and storage</p>
+            <p>forwarding services</p>
+          </div>
+          </div>
+          <div  class="foot" >
+            <div style=" display: flex; flex-direction: column; background: rgba(255,255,255,0,1); backdrop-filter:blur(7px);  -webkit-backdrop-filter: blur(4px);  color: wheat ; gap: 10px;">
+              <h3 style="text-decoration: underline; text-decoration-color: coral; text-decoration-thickness: 5px;">QUICK LINKS</h3>
+              <a href="index.html" style="text-decoration: none; color: whitesmoke;">Home</a>
+              <a href="/html Route/services.html" style="text-decoration: none; color: whitesmoke;">Our Services</a>
+              <a href="/html Route/about us.html" style="text-decoration: none; color: whitesmoke;">About Us </a>
+              <a href="/html Route/faq.html" style="text-decoration: none; color: whitesmoke;">FAQ</a>
+              
+            </div>
+            <div style="  display: flex; flex-direction: column;     background: rgba(255,255,255,0,1); backdrop-filter:blur(7px);  -webkit-backdrop-filter: blur(4px);  color: whitesmoke; gap: 10px;  ">
+              <h3 style="text-decoration: underline; text-decoration-color: coral; text-decoration-thickness: 5px;">CONTACT</h3>
+              <p>5674 jarvisville Road,Hicksville 11801 NY USA</p>
+              <p style="color: coral;">Tel +1(867)678-6897</p>
+              <p style="color: coral;">support@trustportexpress.com</p>
+              <p>monday - saturday 9:00AM - 5:00PM</p>
+            </div>
+            <p style="color: whitesmoke;">&copy; 2025 TrustPort Express Courier Service. All rights reserved.</p>
+            </div>
+           
+        </footer>
+        <script>
+  document.getElementById('chat-toggle').onclick = function () {
+    const box = document.getElementById('chat-box');
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+  };
+</script>
+
+    
+        <script src="js/index.js"></script>
+        <script src="js/track-shipment.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="js/chat.js"></script>
+    
+</body>
+</html>

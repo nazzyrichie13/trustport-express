@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      .divItem {
+        display: none;
+      }
+    
+      .divItem.item {
+        display: block;
+      }
+    
+      .image-article img {
+        display: none;
+      }
+    </style>
+    
+</head>
+
+<body>
+    <div class="nav" style="display: flex; justify-content: space-between; background-color: cornsilk; padding: 10px 30px; align-items: center;">
+        <div class="design"
+        style="
+        color: rgb(65, 47, 79); font-style: italic; font-size: 25px; font-weight: 900; text-decoration: line-through;">
+            =TPE=
+        </div>
+        <div id="span_toggle"  style=" display: flex; flex-direction: column; gap: 4px; position: relative;"></span>
+            <span style="width: 25px; background-color: rgb(65, 47, 79); border: 1px; height: 3px; font-weight: 900;"></span>
+            <span style="width: 25px; background-color: rgb(65, 47, 79); border: 1px; height: 3px; font-weight: 900;"></span>
+            <span style="width: 25px; background-color: rgb(65, 47, 79); border: 1px; height: 3px; font-weight: 900;"></span>
+        </div>
+        <div id="navigate" class="navigate" >
+          
+            <a href="index.html">Home</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="about .html">About Us</a>
+            <a href="faq.html">FAQ</a>
+            <button style="color: red; font-size: 17px ; font-weight: 900; border: none;" onclick="removeNav() ">x</button>
+        </div>
+    </div>
+    <div class="whitenav" style="display: flex; justify-content: space-between; align-items: center;   font-weight: 900; background-color: rgba(32, 5, 75, 0.877); position: sticky; top: 0; z-index: 1000;">
+        <p style="color: white; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; margin-left: 15px;">TrustPort Express</p>
+        <div style="background-color: coral; padding: 16px; border-start-start-radius: 21px;">
+            <a href="tracking.html" style="color: white; text-decoration: none; font-weight: 900;">QUICK TRACKING</a>
+        </div>
+    </div>
+    
+    <div class="slider">
+      <div class="image-container container active">
+        <img src="images/cargo ship.jpeg" alt="Cargo Ship">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px;">
+          <h3 class="image-text delay-1">WE ARE THE BIGGEST COURIER NETWORK COMPANY</h3>
+          <p class="image-text delay-2" style="font-size: 12px; font-weight: 800;">Think courier. Think us.</p>
+          <a href="tracking.html" class="image-text delay-3 cta-button">TRACK PACKAGE →</a>
+        </div>
+      </div>
+    
+      <div class="image-container container">
+        <img src="images/semi-trailer-trucks-on-parking-600nw-2482234831.webp" alt="Trucks">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px;">
+          <h3 class="image-text delay-1">YOUR TRUSTED ADVISOR</h3>
+          <p class="image-text delay-2" style="font-size: 13px; font-weight: 800;">
+            With our global redelivery platform, shippers can reduce failed delivery attempts and provide an outstanding customizable receiver experience.
+          </p>
+          <a href="services.html" class="image-text delay-3 cta-button">OUR SERVICES →</a>
+        </div>
+      </div>
+    
+      <div class="image-container container">
+        <img src="images/cargo 6.jpeg" alt="Cargo">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px;">
+          <h3 class="image-text delay-1">WELCOME TO TRUSTPORT EXPRESS</h3>
+          <p class="image-text delay-2" style="font-size: 13px; font-weight: 800;">
+            We simplify logistics for you across the globe. Safe. Reliable. Fast.
+          </p>
+          <a href="about .html" class="image-text delay-3 cta-button">LEARN MORE →</a>
+        </div>
+      </div>
+    </div>
+  
+
+     
+
+    <!--  -->
+    
+    <div class="sideview" style="display: flex; width: 100%; max-height: 500px; justify-content: space-between;"> 
+
+       <!-- Left Column: List of Clickable Topics --> 
+      <div class="article" style="display: flex; flex-direction: column; flex: 1; min-width: 200px; background-color: whitesmoke; padding: 10px; font-family: 'Trebuchet MS', Arial, sans-serif; font-weight: 400;">
+        <p>Evaluate Your Business Needs</p>
+        <p>Overcome Specific Challenges</p>
+        <p>Identify New Markets</p>
+        <p>Help With Customs</p>
+      </div>
+    
+      <!-- Middle Column: Details for each topic -->
+      <div class="divArticle" style=" padding: 10px;">
+        <div class="divItem">
+          <h3>Evaluate Your Business Needs</h3>
+          <p>Whether the target is B2B or B2C, today your e-commerce company is in an ideal position to grow by selling internationally. So whether you are just starting your export journey or already selling overseas, we can help you understand what you need to expand globally.</p>
+        </div>
+        <div class="divItem">
+          <h3>Overcome Specific Challenges</h3>
+          <p>We know that every business is unique. Whether you’re a Fortune 500 or a small startup – we’ll work closely with you to identify industry-specific solutions to the exact challenges you face with your e-commerce and cross-border sales.</p>
+        </div>
+        <div class="divItem">
+          <h3>Identify New Markets</h3>
+          <p>E-commerce businesses benefit from opening themselves to as many international markets as possible. We’ll work with you to identify countries best suited to your products – unlocking potential and increasing sales.</p>
+        </div>
+        <div class="divItem">
+          <h3>Help With Customs</h3>
+          <p>The specialists at TP Express Shipping can help you navigate complex Customs clearance processes. With our local expertise, we solve issues before they occur – ensuring your deliveries reach their destination quickly.</p>
+        </div>
+      </div>
+    
+      <!-- Right Column: Images -->
+      <div class="image-article" style="display: flex; flex-direction: column;">
+        <img src="images/img9.jpg" alt="img" style="width: 550px; height: 500px;">
+        <img src="images/img11.jpg" alt="img" style="width: 550px; height: 500px;">
+        <img src="images/motor warehouse.jpeg" alt="img" style="width: 550px; height: 500px;">
+        <img src="images/custom.jpg" alt="img" style="width: 550px; height: 500px;">
+      </div>
+    
+    </div>
+    
+    <!-- Section Divider -->
+    <div style="background-color: whitesmoke; font-family: 'Trebuchet MS', Arial, sans-serif; font-weight: 800; padding: 10px 40px;"> 
+      <h3>OUR FEATURED SERVICES</h3>
+    </div>
+    
+  
+
+    
+      
+
+    <div class="services">
+      <div class="feature">
+        <img src="images/cargo 6.jpeg" alt="img" >
+        <div class="feature_div">
+          <h4>FREIGHT SERVICES</h4>
+          <p>By using a combination of sea and air services,you bring added to your supply chain</p>
+        </div>
+      </div>
+      <div class="feature">
+        <img src="images/motor delivery.jpeg" alt="img">
+        <div class="feature_div">
+          <h4>MULTIMODAL TRANSPORT</h4>
+          <P>Combined rail road transport is particularly well suited to the shipping of hazardous goods since it reduce risk.</P>
+        </div>
+      </div>
+      <div class="feature">
+        <img src="images/warehouse.jpeg" alt="img">
+        <div class="feature_div">
+          <h4>WAREHOUSING AND STORAGE</h4>
+          <p>trustport Express services is able to offer heated warehouse solutions both for short term and long-term storage</p>
+        </div>
+      </div>
+      <div class="feature">
+        <img src="images/ship.jpeg" alt="img" style="width: 300px;">
+        <div class="feature_div" id="feature_special">
+          <h4>FORWARDING SERVICES</h4>
+        <P>With our extensive network ,we will find a competitive and efficient solution to your next assignment</P>
+        </div>
+      </div>
+    </div>
+
+    <div class="accountOpen">
+      <i class="fa-solid fa-id-badge" style="font-size: 80px; "></i>
+      <div>
+        <h5>Sign up now to enjoy personalized shipping rates!</h5>
+        <p>Benefits from our services and solutions designed to meet all of your shipping needs</p>
+      </div>
+      <a href="#">OPEN AN ACCOUNT</a>
+    </div>
+    <div class="shipping">
+      <h5>Thinking of shipping to the USA  and the world?</h5>
+      <p>Changing U.S. Tariffs and Customs Regulations can affect your shipping Get help navigating the latest international shipping requirements</p>
+      <button>LEARN MORE</button>
+      <h3>GO GLOBAL AND DISCOVER THE WORLD!!!</h3>
+    </div>
+    <div class="staffdiv">
+      <div class="glass">
+        <i class="fa-solid fa-user"></i>
+        <p>12258</p>
+        <p style="color: coral;">Delivery Staff</p>
+        <i class="fa-solid fa-handshake"></i>
+        <p>27</p>
+        <p style="color: coral;">Supported Countrys</p>
+      </div>
+      <div class="glass">
+        <i class="fa-regular fa-compass"></i>
+        <p>5006</p>
+        <p style="color: coral;">Company Vehicles</p>
+        
+        <i class="fa-solid fa-envelope"></i>
+        <p >530485</p>
+        <p style="color: coral;">Deliveries Done</p>
+      </div>
+    </div>
+    <!-- Floating Chat Icon -->
+<div id="chat-toggle" style="position: fixed; bottom: 20px; right: 20px; cursor: pointer;">
+  <i class="fas fa-paper-plane fa-2x"></i>
+</div>
+
+<!-- Chat Popup -->
+<div id="chat-box" style="position: fixed; bottom: 70px; right: 20px; width: 300px; max-height: 400px; background: white; border: 1px solid #ccc; padding: 10px; display: none;">
+  <div id="chat-messages" style="height: 300px; overflow-y: auto;"></div>
+  <form id="chat-form">
+    <input id="chat-input" type="text" placeholder="Type a message..." style="width: 80%;" />
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+
+
+    <footer >
+
+    <div class="foot" >
+      <div  style=" display: flex; flex-direction: column; background: rgba(255,255,255,0,1); backdrop-filter:blur(7px);  -webkit-backdrop-filter: blur(4px);  color: white  ; gap: 10px;">
+        <h3 style="text-decoration: underline; text-decoration-color: coral; text-decoration-thickness: 5px;">TRUSTPORT EXPRESS COURIER SERVICES</h3>
+        <p class="first_footer" style="width: 350px; ">Whatever the situation trustport express courier services will find a solution for delivery needs Fast, efficient and friendly your goods are in safe hands the moment they leave your premises</p>
+      </div>
+      <div class="footer_service" style="display: flex; flex-direction: column;     background: rgba(255,255,255,0,1); backdrop-filter:blur(7px);  -webkit-backdrop-filter: blur(4px);  color: whitesmoke; gap: 10px;  ">
+        <h3 style="text-decoration: underline; text-decoration-color: coral; text-decoration-thickness: 5px;">OUR SERVICES</h3>
+        <p>freight services</p>
+        <p>multmodal transport</p>
+        <p>warehousing and storage</p>
+        <p>forwarding services</p>
+      </div>
+      </div>
+      <div  class="foot" >
+        <div style=" display: flex; flex-direction: column; background: rgba(255,255,255,0,1); backdrop-filter:blur(7px);  -webkit-backdrop-filter: blur(4px);  color: wheat ; gap: 10px;">
+          <h3 style="text-decoration: underline; text-decoration-color: coral; text-decoration-thickness: 5px;">QUICK LINKS</h3>
+          <a href="index.html" style="text-decoration: none; color: whitesmoke;">Home</a>
+          <a href="services.html" style="text-decoration: none; color: whitesmoke;">Our Services</a>
+          <a href="about.html" style="text-decoration: none; color: whitesmoke;">About Us </a>
+          <a href="faq.html" style="text-decoration: none; color: whitesmoke;">FAQ</a>
+          
+        </div>
+        <div style="  display: flex; flex-direction: column;     background: rgba(255,255,255,0,1); backdrop-filter:blur(7px);  -webkit-backdrop-filter: blur(4px);  color: whitesmoke; gap: 10px;  ">
+          <h3 style="text-decoration: underline; text-decoration-color: coral; text-decoration-thickness: 5px;">CONTACT</h3>
+          <p>5674 jarvisville Road,Hicksville 11801 NY USA</p>
+          <p style="color: coral;">Tel +1(867)678-6897</p>
+          <p style="color: coral;">support@trustportexpress.com</p>
+          <p>monday - saturday 9:00AM - 5:00PM</p>
+        </div>
+        <p style="color: whitesmoke;">&copy; 2025 TrustPort Express Courier Service. All rights reserved.</p>
+        </div>
+       
+    </footer>
+
+<script>
+  document.getElementById('chat-toggle').onclick = function () {
+    const box = document.getElementById('chat-box');
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+  };
+</script>
+
+    
+        
+
+    
+    <script src="js/index.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>

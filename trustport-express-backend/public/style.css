@@ -1,0 +1,542 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  
+  font-family: 'Trebuchet MS', sans-serif;
+  
+  
+  
+  
+  
+
+  
+}
+
+ 
+
+
+.article p { 
+  pointer-events: auto;
+  cursor: pointer;
+  padding: 10px;
+}
+
+
+.image-article img{
+  display: none;
+  max-width: 800px;
+  width: 100%;
+
+  
+}
+.divArticle{
+  position: relative; /* This is key */
+  height: 100%; /* or a fixed height if needed */
+}
+
+
+
+ .divItem-image{ 
+  display: block;
+  max-width: 450px;
+  padding: 20px;
+}  
+.divItem-image p{
+font-size: 18px;
+}
+ .first{
+  display: block;
+
+}
+.article p:active {
+  background-color: coral;
+}
+
+.article p:hover {
+  background-color: blue;
+}
+
+
+
+.navigate{
+  display: none;
+  position: absolute;
+  right: 35px;
+  top: 40px;
+  background-color: whitesmoke;
+  padding: 20px;
+  cursor: pointer;
+  z-index: 10000;
+  width: 100px;
+  
+  
+  
+  
+}
+.navigate a{ 
+  text-decoration: none;
+  text-transform: capitalize;
+  color: black;
+  
+
+}
+.hidden{
+  display: none;
+}
+.services{
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.feature{
+  display: flex;
+  gap: 5px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.feature h4{
+  color: rgba(32, 5, 75, 0.877);
+}
+.feature_div{
+  border-start-start-radius: 55px  ;
+  
+  background-color: white;
+  
+  color: black;
+
+  height: 150px;
+  padding: 40px;
+  
+  
+
+}
+.feature img{
+  max-width: 350px;
+  max-height: 250px;
+  transform: skewX(-10deg);
+  margin: 50px;
+}
+#feature_special{
+  background-color: rgba(32, 5, 75, 0.877);
+  color: white;
+  
+  
+}
+#feature_special h4{
+  color: white;
+}
+.accountOpen{
+  display: flex;
+  padding: 15px;
+  justify-content: space-between;
+  background-color: rgba(32, 5, 75, 0.877);
+  color: white;
+  font-size: 25px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  align-items: center;
+}
+.accountOpen a{
+  background-color: coral;
+  color: white;
+  
+  display: flex;
+  align-items: center;
+  
+  font-weight: 600;
+  font-family: sans-serif;
+  padding: 10px; 
+  font-size: 14px;
+  border-start-start-radius: 25px;
+  text-decoration: none;
+}
+.shipping{
+  background-color: whitesmoke;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+ font-size: 15px;
+margin: 30px 0;
+
+}
+.shipping button{
+  width: 250px;
+  text-align: center;
+  background-color: rgba(32, 5, 75, 0.877);
+  color: coral;
+  border-radius: 50%;
+  
+}
+.shipping p{
+  width: 300px;
+  font-size: 18px;
+  
+}
+.staffdiv{
+  background-image: url(images/all\ cargo.jpeg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 50vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  
+  
+}
+
+.glass{
+  background: rgba(255,255,255,0,1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(7px);
+  color: whitesmoke;
+  width: 800px;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: 20px;
+
+}
+.slider {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.container.active {
+  display: flex;
+}
+
+.image-container img {
+  width: 100%;
+  height: 270px;
+  display: block;
+}
+
+.image-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 {
+  transition-delay: 0.3s;
+}
+
+.delay-2 {
+  transition-delay: 0.6s;
+}
+
+.delay-3 {
+  transition-delay: 0.9s;
+}
+
+.cta-button {
+  background-color: coral;
+  color: white;
+  text-decoration: none;
+  width: 160px;
+  height: 35px;
+  font-size: 15px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  border-radius: 5px;
+} 
+footer{
+  
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.904);
+   display: flex;
+     cursor: pointer;
+     padding: 20px 0;
+     justify-content: space-evenly;
+     
+
+  
+  
+}
+.footer_service{
+  font-size: 15px;
+  
+  
+  
+}
+.foot{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  
+}
+.first_footer{
+  font-size: 15px;
+}
+.track{
+  background-color: rgb(65, 47, 79);
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: whitesmoke;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 800;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+.trackerInput input{
+  padding: 10px;
+  border-color:rgb(65, 47, 79) ;
+}
+.trackerInput button{
+  padding: 10px;
+  
+  background-color: coral;
+  color: whitesmoke;
+  border: none;
+  font-weight: 900;
+}
+.manageinput{
+  display: flex;
+  
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px;
+}
+.manageclass{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Toggle Icon Button */
+#chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007BFF;
+  color: whitesmoke;
+  font-size: 20px;
+  padding: 10px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Chat Popup Box */
+#chat-box {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 280px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+}
+
+#chat-header {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#chat-messages {
+  height: 180px;
+  overflow-y: auto;
+  padding: 10px;
+  font-size: 0.9rem;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+#chat-form {
+  display: flex;
+  padding: 5px;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+}
+
+#chat-form button {
+  padding: 8px 12px;
+  background: #007BFF;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+@media  screen and (max-width:768px) {
+  body{
+    
+    width: 100%;
+    padding: 0;
+    margin: 0  ;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    
+    
+    
+    
+    
+  }
+  
+  .sideview{
+    display: flex;
+    flex-direction: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    
+
+  
+    
+    
+  }
+  .services{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  .feature{
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+  }
+  .image-article img{
+    display: none;
+    
+  }
+  .accountOpen{
+    display: flex;
+    flex-direction: column;
+  }
+  .feature_div{
+  
+  
+    width: 100%;
+    height: 100%;
+  
+  }
+  
+  
+  footer{
+    
+    font-size: 5px;
+    
+
+    
+  }
+  .footer_service{
+  
+    
+    font-size: 10px;
+    
+
+    
+  }
+  .image-article img{
+    display: none;
+    max-width: 100%;
+    max-height: 200px;
+    
+  
+  
+    
+  }
+  .first_footer{
+    max-width: 180px;
+    font-size: 8px;
+    
+  }
+  .feature_div{
+    max-width: 250px;
+  }
+  .foot{
+    font-size: 9px;
+    margin-bottom: 10px;
+  }
+  .glass{
+    max-width: 200px;
+    height: 20vh;
+    font-size: 10px;
+  }
+  .staffdiv{
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 20vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .feature img{
+    max-width: 250px;
+    max-height: 250px;
+    transform: skewX(-10deg);
+    
+}
+.shipping{
+  font-size: 10px;
+}
+.accountOpen{
+  font-size: 10px;
+}
+ .fa-solid .accountOpen {
+  font-size: 20px;
+}
+
+}
+
+
+  
+  
+
+ 
+
+ 

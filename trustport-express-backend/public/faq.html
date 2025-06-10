@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs | TrustPort Express Courier Service</title>
+    <link rel="stylesheet" href="/trustport-express-backend/public/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        background-color: #f4f6f8;
+        color: #333;
+      }
+  
+      header {
+        background-color: #003366;
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+      }
+  
+      main {
+        max-width: 900px;
+        margin: auto;
+        padding: 40px 20px;
+      }
+  
+      h2 {
+        color: #003366;
+        margin-bottom: 20px;
+      }
+  
+      .faq {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 15px;
+      }
+  
+      .faq h3 {
+        margin: 0;
+        cursor: pointer;
+        position: relative;
+      }
+  
+      .faq h3::after {
+        content: '+';
+        position: absolute;
+        right: 0;
+        font-size: 24px;
+        color: #003366;
+      }
+  
+      .faq.open h3::after {
+        content: '-';
+      }
+  
+      .faq p {
+        margin-top: 10px;
+        display: none;
+      }
+  
+      .faq.open p {
+        display: block;
+      }
+  
+      
+    </style>
+</head>
+<body>
+    
+    <div class="nav" style="display: flex; justify-content: space-between; background-color: cornsilk; padding: 10px 30px; align-items: center;">
+        <div class="design"
+        style="
+        color: rgb(65, 47, 79); font-style: italic; font-size: 25px; font-weight: 900; text-decoration: line-through;">
+            =TPE=
+        </div>
+        <div id="span_toggle"  style=" display: flex; flex-direction: column; gap: 4px; position: relative;"></span>
+            <span style="width: 25px; background-color: rgb(65, 47, 79); border: 1px; height: 3px; font-weight: 900;"></span>
+            <span style="width: 25px; background-color: rgb(65, 47, 79); border: 1px; height: 3px; font-weight: 900;"></span>
+            <span style="width: 25px; background-color: rgb(65, 47, 79); border: 1px; height: 3px; font-weight: 900;"></span>
+        </div>
+        <div id="navigate" class="navigate" >
+          
+            <a href="index.html">Home</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="about .html">About Us</a>
+            <a href="faq.html">FAQ</a>
+            <button style="color: red; font-size: 17px ; font-weight: 900; border: none;" onclick="removeNav() ">x</button>
+        </div>
+    </div>
+    <div class="whitenav" style="display: flex; justify-content: space-between; align-items: center;   font-weight: 900; background-color: rgba(32, 5, 75, 0.877); position: sticky; top: 0; z-index: 1000;">
+        <p style="color: white; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; margin-left: 15px;">TrustPort Express</p>
+        <div style="background-color: coral; padding: 16px; border-start-start-radius: 21px;">
+            <a href="tracking.html" style="color: white; text-decoration: none; font-weight: 900;">QUICK TRACKING</a>
+        </div>
+    </div>
+    <a href="index.html" style="padding: 5px; background-color: chartreuse; color: white; max-width: 80px; border-radius: 50%; text-align: center;">Home</a>
+    
+  
+    <!--  -->
+    <header>
+      <h1>Frequently Asked Questions</h1>
+      <p>Find answers to the most common questions about our courier services.</p>
+    </header>
+  
+    <main>
+      <section>
+        <h2>FAQs</h2>
+  
+        <div class="faq">
+          <h3>How can I track my parcel?</h3>
+          <p>You can track your parcel using the tracking number provided after dispatch. Simply visit our tracking page and enter the code to see the current status.</p>
+        </div>
+  
+        <div class="faq">
+          <h3>What delivery options are available?</h3>
+          <p>We offer same-day, next-day, and international shipping options to meet various delivery needs.</p>
+        </div>
+  
+        <div class="faq">
+          <h3>What items are prohibited from shipping?</h3>
+          <p>Prohibited items include hazardous materials, perishable food, weapons, and illegal substances. Please check our shipping policy for a full list.</p>
+        </div>
+  
+        <div class="faq">
+          <h3>How do I contact customer support?</h3>
+          <p>You can reach our support team via the Contact page, email at support@trustportexpress.com, or by calling +1 (555) 123-4567.</p>
+        </div>
+  
+        <div class="faq">
+          <h3>What happens if my package is delayed or lost?</h3>
+          <p>In the rare case of delays or loss, please contact our support team immediately. We will investigate and provide a resolution based on our delivery policy.</p>
+        </div>
+      </section>
+    </main>
+    <!--  -->
+    <footer >
+
+        <div class="foot" >
+          <div  style=" display: flex; flex-direction: column; background: rgba(255,255,255,0,1); backdrop-filter:blur(7px);  -webkit-backdrop-filter: blur(4px);  color: white  ; gap: 10px;">
+            <h3 style="text-decoration: underline; text-decoration-color: coral; text-decoration-thickness: 5px;">TRUSTPORT EXPRESS COURIER SERVICES</h3>
+            <p class="first_footer" style="width: 350px; ">Whatever the situation trustport express courier services will find a solution for delivery needs Fast, efficient and friendly your goods are in safe hands the moment they leave your premises</p>
+          </div>
+          <div class="footer_service" style="display: flex; flex-direction: column;     background: rgba(255,255,255,0,1); backdrop-filter:blur(7px);  -webkit-backdrop-filter: blur(4px);  color: whitesmoke; gap: 10px;  ">
+            <h3 style="text-decoration: underline; text-decoration-color: coral; text-decoration-thickness: 5px;">OUR SERVICES</h3>
+            <p>freight services</p>
+            <p>multmodal transport</p>
+            <p>warehousing and storage</p>
+            <p>forwarding services</p>
+          </div>
+          </div>
+          <div  class="foot" >
+            <div style=" display: flex; flex-direction: column; background: rgba(255,255,255,0,1); backdrop-filter:blur(7px);  -webkit-backdrop-filter: blur(4px);  color: wheat ; gap: 10px;">
+              <h3 style="text-decoration: underline; text-decoration-color: coral; text-decoration-thickness: 5px;">QUICK LINKS</h3>
+              <a href="index.html" style="text-decoration: none; color: whitesmoke;">Home</a>
+              <a href="services.html" style="text-decoration: none; color: whitesmoke;">Our Services</a>
+              <a href="about.html" style="text-decoration: none; color: whitesmoke;">About Us </a>
+              <a href="faq.html" style="text-decoration: none; color: whitesmoke;">FAQ</a>
+              
+            </div>
+            <div style="  display: flex; flex-direction: column;     background: rgba(255,255,255,0,1); backdrop-filter:blur(7px);  -webkit-backdrop-filter: blur(4px);  color: whitesmoke; gap: 10px;  ">
+              <h3 style="text-decoration: underline; text-decoration-color: coral; text-decoration-thickness: 5px;">CONTACT</h3>
+              <p>5674 jarvisville Road,Hicksville 11801 NY USA</p>
+              <p style="color: coral;">Tel +1(867)678-6897</p>
+              <p style="color: coral;">support@trustportexpress.com</p>
+              <p>monday - saturday 9:00AM - 5:00PM</p>
+            </div>
+            <p style="color: whitesmoke;">&copy; 2025 TrustPort Express Courier Service. All rights reserved.</p>
+            </div>
+           
+        </footer>
+    
+    <script src="js/index.js"></script>
+    
+</body>
+</html>
