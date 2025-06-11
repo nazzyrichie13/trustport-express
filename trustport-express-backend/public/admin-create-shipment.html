@@ -128,7 +128,7 @@
     });
     const trackingCode = new URLSearchParams(window.location.search).get('code');
 
-  fetch(`/api/shipments/${trackingCode}`)
+  fetch(`/api/shipments/${trackingCode}`) 
     .then(res => res.json())
     .then(data => {
       document.getElementById('trackingCode').textContent = data.trackingCode || 'N/A';

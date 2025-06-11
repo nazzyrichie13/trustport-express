@@ -21,7 +21,15 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('✅ Connected to MongoDB');
+}).catch(err => {
+  console.error('❌ MongoDB connection failed:', err.message);
+});
+
 
 
 
@@ -51,3 +59,4 @@ io.on('connection', (socket) => {
 // Server listen
 const PORT = process.env.PORT || 5500;
 server.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+console.log('MongoDB URI:', process.env.MONGODB_URI);
