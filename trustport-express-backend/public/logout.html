@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Logged Out - TrustPort Express Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 50px;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+      display: inline-block;
+    }
+    h2 {
+      color: #007BFF;
+    }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: white;
+      background: #007BFF;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+    a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>You have been logged out.</h2>
+    <a href="/admin-login.html">Return to Login</a>
+  </div>
+
+  <script>
+    // Clear token from localStorage
+    localStorage.removeItem('adminToken');
+  </script>
+</body>
+</html>
