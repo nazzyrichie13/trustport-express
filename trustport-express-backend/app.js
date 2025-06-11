@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const http = require('http');
 const socketIO = require('socket.io');
+const adminAuthRoute = require('./routes/adminAuth');
 
 
 
@@ -29,6 +30,8 @@ app.use('/api/shipments', require('./routes/shipments'));
 app.use('/api/contact', require('./routes/contact'));
 app.use('/api/tracking', require('./routes/tracking'));
 app.use('/api/chat', require('./routes/chat'));
+app.use('/api/admin', adminAuthRoute);
+
 
 // WebSocket event handling
 io.on('connection', (socket) => {
