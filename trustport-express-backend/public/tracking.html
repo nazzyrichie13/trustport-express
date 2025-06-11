@@ -59,7 +59,19 @@
          </div>
          </form>
     </div>
-     <div id="tracking-result"></div>
+     <div id="result" style="margin-top: 20px; display: none;">
+    <h3>Shipment Details</h3>
+    <p><strong>Tracking Code:</strong> <span id="trackCode"></span></p>
+    <p><strong>Sender:</strong> <span id="senderName"></span></p>
+    <p><strong>Recipient:</strong> <span id="recipientName"></span></p>
+    <p><strong>Status:</strong> <span id="status"></span></p>
+    <p><strong>Location:</strong> <span id="location"></span></p>
+    <p><strong>Expected Delivery:</strong> <span id="expectedDelivery"></span></p>
+  </div>
+
+  <p id="errorMessage" style="color: red; margin-top: 10px;"></p>
+</div>
+
     <div class="manageinput">
         <div class="manageclass" >
             <i class="fa-solid fa-truck-fast" style="font-size: 45px;"></i>
@@ -128,10 +140,50 @@
            
         </footer>
         <script>
+  
+  const trackForm = document.getElementById('track-form');
+  const resultBox = document.getElementById('result');
+  const errorBox = document.getElementById('errorMessage');
+
+  trackForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const code = document.getElementById('trackingCode').value.trim();
+    resultBox.style.display = 'none';
+    errorBox.textContent = '';
+
+    if (!code) {
+      errorBox.textContent = 'Please enter a tracking code.';
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/shipments/${code}`);
+      const data = await res.json();
+
+      if (!res.ok) {
+        errorBox.textContent = data.message || 'Shipment not found.';
+        return;
+      }
+
+      document.getElementById('trackCode').textContent = data.trackingCode;
+      document.getElementById('senderName').textContent = data.senderName || 'N/A';
+      document.getElementById('recipientName').textContent = data.recipientName || 'N/A';
+      document.getElementById('status').textContent = data.status || 'N/A';
+      document.getElementById('location').textContent = data.currentLocation || 'N/A';
+      document.getElementById('expectedDelivery').textContent = new Date(data.expectedDelivery).toLocaleDateString() || 'N/A';
+
+      resultBox.style.display = 'block';
+    } catch (err) {
+      errorBox.textContent = 'Error tracking shipment.';
+    }
+  });
   document.getElementById('chat-toggle').onclick = function () {
     const box = document.getElementById('chat-box');
     box.style.display = box.style.display === 'none' ? 'block' : 'none';
-  };
+  }
+  
+
 </script>
 
     
