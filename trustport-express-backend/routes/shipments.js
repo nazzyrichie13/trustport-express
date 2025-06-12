@@ -1,54 +1,77 @@
 // Add after the existing routes in shipments.js
-
-// User requests reschedule by tracking code
 const express = require('express');
 const router = express.Router();
 const Shipment = require('../models/Shipment');
 const verifyAdmin = require('../middleware/verifyAdmin');
 const sendEmail = require('../utils/sendEmail');
 
+// Generate random tracking code
+const generateTrackingCode = () => {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let code = '';
+  for (let i = 0; i < 10; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return code;
+};
+
 router.post('/create', verifyAdmin, async (req, res) => {
   try {
     const {
-      trackingCode,
-  senderName,
-  recipientName,
-  senderPhone,
-  recipientPhone,
-  address,
-  email,
-  status,
-  shipmentType,
-  packageWeight,
-  packageDescription,
-  pickupDate,
-  expectedDeliveryDate,
-  currentLocation
+      senderName,
+      recipientName,
+      senderPhone,
+      recipientPhone,
+      address,
+      email,
+      status,
+      shipmentType,
+      packageWeight,
+      packageDescription,
+      pickupDate,
+      expectedDeliveryDate,
+      currentLocation
     } = req.body;
 
-    
-    
-    const shipment = new Shipment(req.body);
+    let trackingCode;
+    let existing;
+
+    // Keep generating a tracking code until it's unique
+    do {
+      trackingCode = generateTrackingCode();
+      existing = await Shipment.findOne({ trackingCode });
+    } while (existing);
+
+    const shipment = new Shipment({
+      trackingCode,
+      senderName,
+      recipientName,
+      senderPhone,
+      recipientPhone,
+      address,
+      email,
+      status,
+      shipmentType,
+      packageWeight,
+      packageDescription,
+      pickupDate,
+      expectedDelivery: expectedDeliveryDate,
+      currentLocation
+    });
+
     await shipment.save();
-    await sendEmail(shipment.email, 'Shipment Created', `Your tracking code is ${shipment.trackingCode}.`);
-    res.status(201).json({ message: 'Shipment created', shipment });
+
+    await sendEmail(email, 'Shipment Created', `Your tracking code is ${trackingCode}.`);
+
+    res.status(201).json({ message: 'Shipment created successfully', shipment });
   } catch (err) {
-    console.error('❌ Error creating shipment:', err);  // <--- This line is important
-    res.status(500).json({ message: 'Error creating shipment', error: err.message });
-  }
-
-});
-
-
-router.get('/:trackingCode', async (req, res) => {
-  try {
-    const shipment = await Shipment.findOne({ trackingCode: req.params.trackingCode });
-    if (!shipment) return res.status(404).json({ message: 'Shipment not found' });
-    res.json(shipment);
-  } catch (err) {
-    res.status(500).json({ message: 'Error retrieving shipment' });
+    console.error(err);
+    res.status(500).json({ message: 'Error creating shipment' });
   }
 });
+
+// User requests reschedule by tracking code
+
 
 router.post('/reschedule/:trackingCode', async (req, res) => {
   try {
