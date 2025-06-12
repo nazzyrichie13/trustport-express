@@ -48,8 +48,7 @@
   <h2>Create New Shipment</h2>
 
   <form id="createShipmentForm">
-    <label for="trackingCode">Tracking Code</label>
-    <input type="text" id="trackingCode" name="trackingCode" required />
+    
 
     <label for="senderName">Sender Name</label>
     <input type="text" id="senderName" name="senderName" required />
@@ -112,7 +111,7 @@
       e.preventDefault();
 
       const formData = {
-        trackingCode: form.trackingCode.value.trim(),
+        
         senderName: form.senderName.value.trim(),
         recipientName: form.recipientName.value.trim(),
         senderPhone: form.senderPhone.value.trim(),
