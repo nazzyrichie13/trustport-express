@@ -9,15 +9,50 @@ const sendEmail = require('../utils/sendEmail');
 
 router.post('/create', verifyAdmin, async (req, res) => {
   try {
-    const { trackingCode, recipientName, address, email, status, location } = req.body;
-    const shipment = new Shipment({ trackingCode, recipientName, address, email, status, location });
+    const {
+      trackingCode,
+      recipientName,
+      address,
+      email,
+      status,
+      currentLocation,
+      phoneNumber,
+      packageWeight,
+      packageDescription,
+      pickupDate,
+      shipmentType,
+      expectedDeliveryDate,
+      senderPhone,
+      receiverPhone
+    } = req.body;
+
+    const shipment = new Shipment({
+      trackingCode,
+      recipientName,
+      address,
+      email,
+      status,
+      currentLocation,
+      phoneNumber,
+      packageWeight,
+      packageDescription,
+      pickupDate,
+      shipmentType,
+      expectedDeliveryDate,
+      senderPhone,
+      receiverPhone
+    });
+
     await shipment.save();
     await sendEmail(email, 'Shipment Created', `Your tracking code is ${trackingCode}.`);
+
     res.status(201).json({ message: 'Shipment created', shipment });
   } catch (err) {
+    console.error('🚨 Error creating shipment:', err);
     res.status(500).json({ message: 'Error creating shipment' });
   }
 });
+
 
 router.get('/:trackingCode', async (req, res) => {
   try {

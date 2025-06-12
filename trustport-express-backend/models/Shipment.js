@@ -52,7 +52,7 @@ const shipmentSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  expectedDelivery: {
+  expectedDeliveryDate: {
     type: Date,
     required: true
   },
