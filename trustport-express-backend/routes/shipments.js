@@ -26,31 +26,17 @@ router.post('/create', verifyAdmin, async (req, res) => {
       receiverPhone
     } = req.body;
 
-    const shipment = new Shipment({
-      trackingCode,
-      recipientName,
-      address,
-      email,
-      status,
-      currentLocation,
-      phoneNumber,
-      packageWeight,
-      packageDescription,
-      pickupDate,
-      shipmentType,
-      expectedDeliveryDate,
-      senderPhone,
-      receiverPhone
-    });
-
+    
+    
+    const shipment = new Shipment(req.body);
     await shipment.save();
-    await sendEmail(email, 'Shipment Created', `Your tracking code is ${trackingCode}.`);
-
+    await sendEmail(shipment.email, 'Shipment Created', `Your tracking code is ${shipment.trackingCode}.`);
     res.status(201).json({ message: 'Shipment created', shipment });
   } catch (err) {
-    console.error('🚨 Error creating shipment:', err);
-    res.status(500).json({ message: 'Error creating shipment' });
+    console.error('❌ Error creating shipment:', err);  // <--- This line is important
+    res.status(500).json({ message: 'Error creating shipment', error: err.message });
   }
+
 });
 
 
