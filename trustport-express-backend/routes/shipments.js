@@ -11,19 +11,19 @@ router.post('/create', verifyAdmin, async (req, res) => {
   try {
     const {
       trackingCode,
-      recipientName,
-      address,
-      email,
-      status,
-      currentLocation,
-      phoneNumber,
-      packageWeight,
-      packageDescription,
-      pickupDate,
-      shipmentType,
-      expectedDeliveryDate,
-      senderPhone,
-      receiverPhone
+  senderName,
+  recipientName,
+  senderPhone,
+  recipientPhone,
+  address,
+  email,
+  status,
+  shipmentType,
+  packageWeight,
+  packageDescription,
+  pickupDate,
+  expectedDeliveryDate,
+  currentLocation
     } = req.body;
 
     
