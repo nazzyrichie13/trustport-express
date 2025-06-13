@@ -46,19 +46,55 @@ app.use('/admin', adminRoutes);
 
 
 // WebSocket event handling
-io.on('connection', (socket) => {
-  console.log('User connected');
+const ChatMessage = require('./models/ChatMessage');
 
+function socketHandler(io) {
+  io.on('connection', (socket) => {
+    console.log('User connected:', socket.id);
 
-  
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg); // broadcast to all
+    socket.on('join', async (userId) => {
+      socket.join(userId);
+      
+      // Send default message from admin
+      const welcomeMessage = new ChatMessage({
+        sender: 'admin',
+        recipient: userId,
+        message: 'Thanks for contacting TrustPort Admin!',
+        isRead: true
+      });
+      await welcomeMessage.save();
+      socket.emit('message', welcomeMessage);
+    });
+
+    socket.on('chat message', async ({ sender, recipient, message }) => {
+      const newMsg = new ChatMessage({ sender, recipient, message });
+      await newMsg.save();
+
+      io.to(recipient).emit('message', newMsg);
+    });
+
+    socket.on('markAsRead', async ({ userId }) => {
+      await ChatMessage.updateMany({ recipient: userId, isRead: false }, { isRead: true });
+    });
   });
+}
+app.get('/api/chat/:userId', async (req, res) => {
+  try {
+    const messages = await ChatMessage.find({
+      $or: [
+        { sender: req.params.userId },
+        { recipient: req.params.userId }
+      ]
+    }).sort({ timestamp: 1 });
 
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
-  });
+    res.json(messages);
+  } catch (err) {
+    res.status(500).json({ error: 'Error fetching messages' });
+  }
 });
+
+
+module.exports = socketHandler;
 
 // Server listen
 const PORT = process.env.PORT || 5500;

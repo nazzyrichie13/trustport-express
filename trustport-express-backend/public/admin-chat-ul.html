@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Chat</title>
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+</head>
+<body>
+  <h2>Admin Chat</h2>
+  <div id="chat-log" style="height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;"></div>
+  <input id="admin-input" type="text" placeholder="Type a message..." />
+  <button onclick="sendMessage()">Send</button>
+
+  <script>
+    const socket = io('http://localhost:5000'); // same backend URL
+
+    const chatLog = document.getElementById('chat-log');
+    const adminInput = document.getElementById('admin-input');
+
+    function sendMessage() {
+      const msg = adminInput.value;
+      if (msg.trim()) {
+        socket.emit('adminMessage', msg);
+        appendToChat(`You: ${msg}`);
+        adminInput.value = '';
+      }
+    }
+
+    socket.on('adminReceive', (msg) => {
+      appendToChat(`User: ${msg}`);
+    });
+
+    function appendToChat(message) {
+      const p = document.createElement('p');
+      p.textContent = message;
+      chatLog.appendChild(p);
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+  </script>
+</body>
+</html>
