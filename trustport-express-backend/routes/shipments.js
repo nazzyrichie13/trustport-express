@@ -126,8 +126,6 @@ router.patch('/:trackingCode', verifyAdmin, async (req, res) => {
   }
 });
 
-const PDFDocument = require('pdfkit');
-const { Readable } = require('stream');
 
 const PDFDocument = require('pdfkit');
 const { Readable } = require('stream');
