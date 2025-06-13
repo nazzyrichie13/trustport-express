@@ -97,10 +97,7 @@ router.get('/all', verifyAdmin, async (req, res) => {
   }
 });
 
-const express = require('express');
-const router = express.Router();
-const Shipment = require('../models/shipment'); // adjust path if needed
-const verifyAdmin = require('../middleware/verifyAdmin'); // make sure this exists
+
 
 // Update shipment by tracking code
 // Get a shipment by tracking code
