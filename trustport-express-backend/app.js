@@ -39,7 +39,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 // Routes
 app.use('/api/shipments', require('./routes/shipments'));
 app.use('/api/contact', require('./routes/contact'));
-app.use('/api/tracking', require('./routes/tracking'));
+
 app.use('/api/chat', require('./routes/chat'));
 app.use('/api/admin', adminAuthRoute);
 app.use('/admin', adminRoutes);
