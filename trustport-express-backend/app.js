@@ -10,6 +10,8 @@ const http = require('http');
 const socketIO = require('socket.io');
 const adminAuthRoute = require('./routes/adminAuth');
 const adminRoutes = require('./routes/admin');
+const ChatMessage = require('./models/ChatMessage');
+
 
 
 
