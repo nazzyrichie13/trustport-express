@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Shipment</title>
+</head>
+<body>
+  <h2>Edit Shipment</h2>
+  <form id="editForm">
+    <input type="text" id="trackingCode" placeholder="Enter Tracking Code" required />
+    <button type="button" id="loadBtn">Load Shipment</button>
+
+    <div id="formFields" style="display: none;">
+      <label>Sender Name: <input type="text" id="senderName" /></label><br />
+      <label>Recipient Name: <input type="text" id="recipientName" /></label><br />
+      <label>Status: 
+        <select id="status">
+          <option value="Pending">Pending</option>
+          <option value="In Transit">In Transit</option>
+          <option value="Delivered">Delivered</option>
+          <option value="Delayed">Delayed</option>
+        </select>
+      </label><br />
+      <label>Current Location: <input type="text" id="currentLocation" /></label><br />
+      <button type="submit">Update Shipment</button>
+    </div>
+
+    <div id="message"></div>
+  </form>
+
+  <script src="js/edit-shipment.js"></script>
+</body>
+</html>

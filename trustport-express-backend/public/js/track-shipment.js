@@ -1,5 +1,5 @@
-document.getElementById('track-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
+document.getElementById('track-form').addEventListener('submit', async () => {
+  
   const code = document.getElementById('trackingCode').value;
   const resultBox = document.getElementById('track-result');
 

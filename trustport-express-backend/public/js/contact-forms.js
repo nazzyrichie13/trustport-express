@@ -1,37 +1,38 @@
-window.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contactForm');
-    const status = document.getElementById('statusMessage');
+  const statusBox = document.getElementById('statusMessage');
 
-    form.addEventListener('submit', async (e) => {
-      
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-      const formData = {
-        name: form.name.value.trim(),
-        email: form.email.value.trim(),
-        subject: form.subject.value.trim(),
-        message: form.message.value.trim(),
-      };
+    const formData = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      subject: form.subject.value.trim(),
+      message: form.message.value.trim()
+    };
 
-      try {
-        const res = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        });
+    statusBox.textContent = 'Sending...';
+    statusBox.style.color = 'blue';
 
-        const data = await res.json();
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
 
-        if (res.ok) {
-          status.style.color = 'green';
-          status.textContent = data.message || 'Form submitted successfully!';
-          form.reset();
-        } else {
-          status.style.color = 'red';
-          status.textContent = data.message || 'Submission failed.';
-        }
-      } catch (err) {
-        status.style.color = 'red';
-        status.textContent = 'Error: ' + err.message;
-      }
-    });
+      const result = await response.json();
+
+      if (!response.ok) throw new Error(result.message || 'Failed to send message');
+
+      statusBox.textContent = 'Message sent successfully!';
+      statusBox.style.color = 'green';
+      form.reset();
+    } catch (err) {
+      statusBox.textContent = `Error: ${err.message}`;
+      statusBox.style.color = 'red';
+    }
+  });
 });
+sss

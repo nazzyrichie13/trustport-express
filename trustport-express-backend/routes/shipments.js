@@ -97,6 +97,24 @@ router.get('/all', verifyAdmin, async (req, res) => {
   }
 });
 
+const express = require('express');
+const router = express.Router();
+const Shipment = require('../models/shipment'); // adjust path if needed
+const verifyAdmin = require('../middleware/verifyAdmin'); // make sure this exists
+
+// Update shipment by tracking code
+// Get a shipment by tracking code
+router.get('/:trackingCode', async (req, res) => {
+  try {
+    const shipment = await Shipment.findOne({ trackingCode: req.params.trackingCode });
+    if (!shipment) return res.status(404).json({ message: 'Shipment not found' });
+    res.json(shipment);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Update a shipment
 router.patch('/:trackingCode', verifyAdmin, async (req, res) => {
   try {
     const shipment = await Shipment.findOneAndUpdate(
@@ -110,6 +128,7 @@ router.patch('/:trackingCode', verifyAdmin, async (req, res) => {
     res.status(500).json({ message: 'Error updating shipment' });
   }
 });
+
 const PDFDocument = require('pdfkit');
 const { Readable } = require('stream');
 
