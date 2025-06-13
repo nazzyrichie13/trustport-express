@@ -9,8 +9,7 @@ const cors = require('cors');
 const http = require('http');
 const socketIO = require('socket.io');
 const adminAuthRoute = require('./routes/adminAuth');
-const receiptRoutes = require('./routes/receipt');
-
+const adminRoutes = require('./routes/admin');
 
 
 
@@ -22,6 +21,7 @@ const io = socketIO(server);
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI, {
@@ -42,7 +42,7 @@ app.use('/api/contact', require('./routes/contact'));
 app.use('/api/tracking', require('./routes/tracking'));
 app.use('/api/chat', require('./routes/chat'));
 app.use('/api/admin', adminAuthRoute);
-app.use('/api/receipt', receiptRoutes);
+app.use('/admin', adminRoutes);
 
 
 // WebSocket event handling
