@@ -128,41 +128,92 @@ router.patch('/:trackingCode', verifyAdmin, async (req, res) => {
 
 
 const PDFDocument = require('pdfkit');
-const { Readable } = require('stream');
+const nodemailer = require('nodemailer');
 
-router.get('/receipt/pdf/:trackingCode', verifyAdmin, async (req, res) => {
+router.post('/create', verifyAdmin, async (req, res) => {
   try {
-    const shipment = await Shipment.findOne({ trackingCode: req.params.trackingCode });
-    if (!shipment) return res.status(404).json({ message: 'Shipment not found' });
+    const {
+      senderName,
+      recipientName,
+      senderPhone,
+      recipientPhone,
+      address,
+      email,
+      status,
+      shipmentType,
+      packageWeight,
+      packageDescription,
+      pickupDate,
+      expectedDeliveryDate,
+      currentLocation
+    } = req.body;
 
+    let trackingCode;
+    let existing;
+
+    do {
+      trackingCode = generateTrackingCode();
+      existing = await Shipment.findOne({ trackingCode });
+    } while (existing);
+
+    const shipment = new Shipment({
+      trackingCode,
+      senderName,
+      recipientName,
+      senderPhone,
+      recipientPhone,
+      address,
+      email,
+      status,
+      shipmentType,
+      packageWeight,
+      packageDescription,
+      pickupDate,
+      expectedDelivery: expectedDeliveryDate,
+      currentLocation
+    });
+
+    await shipment.save();
+
+    // Generate PDF receipt
     const doc = new PDFDocument({ margin: 40 });
-    const stream = Readable.from(doc);
+    const buffers = [];
+    doc.on('data', buffers.push.bind(buffers));
+    doc.on('end', async () => {
+      const pdfData = Buffer.concat(buffers);
 
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename=receipt-${shipment.trackingCode}.pdf`);
+      // Send email with attachment
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL_USERNAME,
+          pass: process.env.EMAIL_PASSWORD
+        }
+      });
 
-    // Header
-    doc
-      .fontSize(20)
-      .fillColor('#007BFF')
-      .text('TrustPort Express', { align: 'center' })
-      .moveDown(0.5)
-      .fontSize(16)
-      .fillColor('black')
-      .text('Shipment Receipt', { align: 'center' })
-      .moveDown(1);
+      const mailOptions = {
+        from: `"TrustPort Express" <${process.env.EMAIL_USERNAME}>`,
+        to: email,
+        subject: `Your Shipment Receipt - ${trackingCode}`,
+        text: `Your shipment has been created.\nTracking Code: ${trackingCode}`,
+        attachments: [
+          {
+            filename: `receipt-${trackingCode}.pdf`,
+            content: pdfData,
+            contentType: 'application/pdf'
+          }
+        ]
+      };
 
-    // Divider
-    doc
-      .strokeColor('#888')
-      .lineWidth(1)
-      .moveTo(40, doc.y)
-      .lineTo(570, doc.y)
-      .stroke()
-      .moveDown();
+      await transporter.sendMail(mailOptions);
 
-    // Details
-    doc.fontSize(12).fillColor('black');
+      res.status(201).json({ message: 'Shipment created and receipt emailed.', shipment });
+    });
+
+    // Build PDF content
+    doc.fontSize(20).fillColor('#007BFF').text('TrustPort Express', { align: 'center' });
+    doc.moveDown(0.5).fontSize(16).fillColor('black').text('Shipment Receipt', { align: 'center' }).moveDown(1);
+    doc.strokeColor('#888').lineWidth(1).moveTo(40, doc.y).lineTo(570, doc.y).stroke().moveDown();
 
     const lines = [
       ['Tracking Code:', shipment.trackingCode],
@@ -177,21 +228,17 @@ router.get('/receipt/pdf/:trackingCode', verifyAdmin, async (req, res) => {
       ['Pickup Date:', new Date(shipment.pickupDate).toLocaleDateString()],
       ['Expected Delivery:', new Date(shipment.expectedDelivery).toLocaleDateString()],
       ['Current Location:', shipment.currentLocation],
-      ['Created At:', new Date(shipment.createdAt).toLocaleString()],
+      ['Created At:', new Date(shipment.createdAt).toLocaleString()]
     ];
 
     lines.forEach(([label, value]) => {
-      doc
-        .font('Helvetica-Bold').text(label, { continued: true })
-        .font('Helvetica').text(` ${value}`)
-        .moveDown(0.5);
+      doc.font('Helvetica-Bold').text(label, { continued: true }).font('Helvetica').text(` ${value}`).moveDown(0.5);
     });
 
     doc.end();
-    stream.pipe(res);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Failed to generate PDF' });
+    res.status(500).json({ message: 'Error creating shipment or sending email' });
   }
 });
 
