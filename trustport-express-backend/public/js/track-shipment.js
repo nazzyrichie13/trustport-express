@@ -10,8 +10,9 @@ document.getElementById('track-form').addEventListener('submit', async () => {
     const data = await res.json();
     resultBox.innerHTML = `
       <strong>Status:</strong> ${data.status} <br />
-      <strong>Location:</strong> ${data.location} <br />
+      <strong>Location:</strong> ${data.currentLocation} <br />
       <strong>Recipient:</strong> ${data.recipientName} <br />
+      <stong>last Updated:</strong>${new Date(data.pickupDate).toLocaleString}
     `;
   } catch (err) {
     resultBox.innerHTML = '<p>Shipment not found or error occurred.</p>';
