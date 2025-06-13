@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     const status = document.getElementById('statusMessage');
 
     form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+      
 
       const formData = {
         name: form.name.value.trim(),

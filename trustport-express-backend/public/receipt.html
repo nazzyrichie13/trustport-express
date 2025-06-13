@@ -10,79 +10,41 @@
       background: #f4f4f4;
     }
 
-    .receipt {
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border: 2px solid #007BFF;
-      border-radius: 10px;
+   </style>
+   </head>
+   <body>
+    <input type="text" id="pdfTrackingCode" placeholder="Enter Tracking Code">
+<button onclick="downloadPDF()">Download PDF Receipt</button>
+
+<script>
+  function downloadPDF() {
+    const trackingCode = document.getElementById('pdfTrackingCode').value.trim();
+    if (!trackingCode) {
+      alert("Please enter a tracking code");
+      return;
     }
 
-    .receipt h2 {
-      color: #007BFF;
-      margin-bottom: 20px;
-    }
+    const token = localStorage.getItem('adminToken');
+    const url = `/api/shipments/receipt/pdf/${trackingCode}`;
 
-    .receipt table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+    fetch(url, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to download PDF');
+      }
+      return response.blob();
+    }).then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `receipt-${trackingCode}.pdf`;
+      a.click();
+    }).catch(err => {
+      alert(err.message);
+    });
+  }
+</script>
 
-    .receipt td {
-      padding: 10px;
-      border-bottom: 1px solid #ccc;
-    }
-
-    .print-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .print-btn:hover {
-      background: #0056b3;
-    }
-  </style>
-</head>
-<body>
-
-<div class="receipt">
-  <h2>TrustPort Express Shipment Receipt</h2>
-  <table>
-    <tr>
-      <td><strong>Tracking Code:</strong></td>
-      <td id="trackingCode">Loading...</td>
-    </tr>
-    <tr>
-      <td><strong>Recipient Name:</strong></td>
-      <td id="recipient">Loading...</td>
-    </tr>
-    <tr>
-      <td><strong>Delivery Address:</strong></td>
-      <td id="address">Loading...</td>
-    </tr>
-    <tr>
-      <td><strong>Status:</strong></td>
-      <td id="status">Loading...</td>
-    </tr>
-    <tr>
-      <td><strong>Current Location:</strong></td>
-      <td id="location">Loading...</td>
-    </tr>
-    <tr>
-      <td><strong>Created On:</strong></td>
-      <td id="createdAt">Loading...</td>
-    </tr>
-  </table>
-
-  <button class="print-btn" onclick="window.print()">Print Receipt</button>
-</div>
-
-
-</body>
-</html>
+   </body>
+   </html>

@@ -8,7 +8,7 @@ const chatInput = document.getElementById('chat-input');
 const chatMessages = document.getElementById('chat-messages');
 
 chatForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+  
   const msg = chatInput.value;
   socket.emit('chat message', msg);
   chatInput.value = '';

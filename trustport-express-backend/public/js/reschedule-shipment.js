@@ -1,5 +1,5 @@
-document.getElementById('reschedule-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
+document.getElementById('reschedule-form').addEventListener('submit', async () => {
+  
 
   const code = document.getElementById('trackingCode').value;
   const newDate = document.getElementById('newDate').value;

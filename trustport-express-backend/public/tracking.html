@@ -59,7 +59,7 @@
          </div>
          </form>
     </div>
-     <div id="result" style="margin-top: 20px; display: none;">
+     <div id="track-result" style="margin-top: 20px; display: none;">
     <h3>Shipment Details</h3>
     <p><strong>Tracking Code:</strong> <span id="trackCode"></span></p>
     <p><strong>Sender:</strong> <span id="senderName"></span></p>
@@ -142,7 +142,7 @@
         <script>
   
   const trackForm = document.getElementById('track-form');
-  const resultBox = document.getElementById('result');
+  const resultBox = document.getElementById('track-result');
   const errorBox = document.getElementById('errorMessage');
 
   trackForm.addEventListener('submit', async (e) => {
