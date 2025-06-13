@@ -2,6 +2,7 @@ document.getElementById('track-form').addEventListener('submit', async () => {
   
   const code = document.getElementById('trackingCode').value;
   const resultBox = document.getElementById('track-result');
+  const trackedAt = new Date().toLocaleDateString;
 
   try {
     const res = await fetch(`/api/shipments/${code}`);
@@ -12,7 +13,7 @@ document.getElementById('track-form').addEventListener('submit', async () => {
       <strong>Status:</strong> ${data.status} <br />
       <strong>Location:</strong> ${data.currentLocation} <br />
       <strong>Recipient:</strong> ${data.recipientName} <br />
-      <stong>last Updated:</strong>${new Date(data.pickupDate).toLocaleString}
+      <stong>last Updated:</strong>${trackedAt} <br/>
     `;
   } catch (err) {
     resultBox.innerHTML = '<p>Shipment not found or error occurred.</p>';
