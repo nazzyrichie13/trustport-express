@@ -9,6 +9,9 @@ const cors = require('cors');
 const http = require('http');
 const socketIO = require('socket.io');
 const adminAuthRoute = require('./routes/adminAuth');
+const receiptRoutes = require('./routes/receipt');
+
+
 
 
 
@@ -39,6 +42,7 @@ app.use('/api/contact', require('./routes/contact'));
 app.use('/api/tracking', require('./routes/tracking'));
 app.use('/api/chat', require('./routes/chat'));
 app.use('/api/admin', adminAuthRoute);
+app.use('/api/receipt', receiptRoutes);
 
 
 // WebSocket event handling
