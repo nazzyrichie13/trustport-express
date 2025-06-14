@@ -4,7 +4,7 @@ dotenv.config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-
+const router = express.Router();
 const cors = require('cors');
 const http = require('http');
 const socketIO = require('socket.io');
