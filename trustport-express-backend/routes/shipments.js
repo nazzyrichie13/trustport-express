@@ -1,5 +1,10 @@
 // Add after the existing routes in shipments.js
-
+const express = require('express');
+const router = express.Router();
+const Shipment = require('../models/Shipment');
+const verifyAdmin = require('../middleware/verifyAdmin');
+const PDFDocument = require('pdfkit');
+const nodemailer = require('nodemailer');
 
 // Generate random tracking code
 const generateTrackingCode = () => {
