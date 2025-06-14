@@ -108,6 +108,22 @@ app.get('/api/shipments', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch shipments' });
   }
 });
+app.get('/api/shipments/:trackingCode', async (req, res) => {
+  try {
+    const { trackingCode } = req.params;
+    const shipment = await Shipment.findOne({ trackingCode });
+
+    if (!shipment) {
+      return res.status(404).json({ message: 'Shipment not found' });
+    }
+
+    res.json(shipment);
+  } catch (err) {
+    console.error('Error fetching shipment:', err.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 
 
