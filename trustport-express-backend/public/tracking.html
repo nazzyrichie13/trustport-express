@@ -66,7 +66,7 @@
     <p><strong>Recipient:</strong> <span id="recipientName"></span></p>
     <p><strong>Status:</strong> <span id="status"></span></p>
     <p><strong>Location:</strong> <span id="location"></span></p>
-    <p><strong>Expected Delivery:</strong> <span id="expectedDelivery"></span></p>
+    <p><strong>Expected Delivery:</strong> <span id="expectedDeliveryDate"></span></p>
   </div>
 
   <p id="errorMessage" style="color: red; margin-top: 10px;"></p>
@@ -171,6 +171,7 @@
       document.getElementById('recipientName').textContent = data.recipientName || 'N/A';
       document.getElementById('status').textContent = data.status || 'N/A';
       document.getElementById('location').textContent = data.currentLocation || 'N/A';
+      document.getElementById('expectedDeliveryDate').textContent = data.expectedDeliveryDate || 'N/A';
       
 
       resultBox.style.display = 'block';
