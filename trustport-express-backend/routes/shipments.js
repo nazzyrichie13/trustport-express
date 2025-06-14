@@ -127,3 +127,4 @@ router.post('/create', verifyAdmin, async (req, res) => {
     res.status(500).json({ message: 'Error creating shipment or sending email' });
   }
 });
+module.exports = router;
