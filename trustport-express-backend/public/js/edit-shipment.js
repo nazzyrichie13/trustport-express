@@ -36,11 +36,17 @@ document.getElementById('editForm').addEventListener('submit', async (e) => {
   };
 
   try {
-    const res = await fetch(`/api/shipments/${trackingCode}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updateData)
-    });
+    const token = localStorage.getItem('token'); // get your saved token
+
+const res = await fetch(`/api/shipments/${trackingCode}`, {
+  method: 'PATCH',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+  body: JSON.stringify(updateData)
+});
+
 
     const data = await res.json();
     if (!res.ok) {
