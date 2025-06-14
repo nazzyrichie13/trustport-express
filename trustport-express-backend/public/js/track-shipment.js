@@ -13,7 +13,7 @@ document.getElementById('track-form').addEventListener('submit', async () => {
       <strong>Status:</strong> ${data.status} <br />
       <strong>Location:</strong> ${data.currentLocation} <br />
       <strong>Recipient:</strong> ${data.recipientName} <br />
-      <stong>last Updated:</strong>${trackedAt} <br/>
+      <stong> Updated:</strong>${trackedAt} <br/>
     `;
   } catch (err) {
     resultBox.innerHTML = '<p>Shipment not found or error occurred.</p>';
