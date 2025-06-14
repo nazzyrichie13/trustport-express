@@ -20,15 +20,10 @@ transporter.verify((error, success) => {
 
 /**
  * Send an email with optional attachments.
- * @param {Object} options
- * @param {string|string[]} options.to - Recipient email or array of emails
- * @param {string} options.subject - Email subject
- * @param {string} options.text - Email body (plain text)
- * @param {Array} [options.attachments] - Optional array of attachments
  */
 async function sendEmail({ to, subject, text, attachments = [] }) {
   try {
-    const info = await transporter.sendEmail({
+    const info = await transporter.sendMail({
       from: `"TrustPort Express" <${process.env.EMAIL_USER}>`,
       to,
       subject,
@@ -41,13 +36,27 @@ async function sendEmail({ to, subject, text, attachments = [] }) {
     console.error("❌ Failed to send email:", error.message);
   }
 }
-const sendEmailNotification = async (to, subject, text) => {
-  await transporter.sendMail({
-    from: '"TrustPort Admin" <no-reply@trustport.com>',
-    to,
-    subject,
-    text
-  });
-};
 
-module.exports = sendEmailNotification,sendEmail;
+/**
+ * Simple email (no attachments)
+ */
+async function sendEmailNotification(to, subject, text) {
+  try {
+    const info = await transporter.sendMail({
+      from: '"TrustPort Admin" <no-reply@trustport.com>',
+      to,
+      subject,
+      text,
+    });
+
+    console.log("✅ Notification email sent:", info.response);
+  } catch (error) {
+    console.error("❌ Failed to send notification:", error.message);
+  }
+}
+
+// ✅ Correctly export both
+module.exports = {
+  sendEmail,
+  sendEmailNotification,
+};
