@@ -109,7 +109,7 @@ app.get('/api/shipments', async (req, res) => {
 
 
 
-router.post('/reschedule', async (req, res) => {
+app.post('/reschedule', async (req, res) => {
   try {
     const { trackingCode, newDeliveryDate, newDeliveryAddress, userEmail } = req.body;
 
