@@ -3,6 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <title>Edit Shipment</title>
+  <style>
+  .shipment-status-wrapper {
+  max-width: 700px;
+  margin-top: 20px;
+}
+
+.shipment-steps {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.step.active {
+  font-weight: bold;
+  color: #000;
+}
+
+.shipment-progress-container {
+  height: 20px;
+  background-color: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.shipment-progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: lightgreen;
+  border-radius: 10px;
+  transition: width 0.5s ease, background-color 0.5s ease;
+}
+</style>
 </head>
 <body>
   <h2>Edit Shipment</h2>
@@ -27,7 +61,85 @@
 
     <div id="message"></div>
   </form>
+  <body>
+  <!-- Your existing shipment editing form -->
+
+  
+
+  <h3>Update Shipment Status</h3>
+<form action="/admin/update-shipment" method="POST">
+  <input type="hidden" name="trackingCode" value="ABC123" />
+  
+  <label>Status:</label>
+  <select name="status" onchange="updateShipmentProgress(this.value)">
+    <option value="pending">Pending</option>
+    <option value="hold">Hold</option>
+    <option value="transit">Transit</option>
+    <option value="editing">Editing</option>
+    <option value="delivered">Delivered</option>
+    <option value="location">Location</option>
+  </select>
+
+  <button type="submit">Save</button>
+</form>
+
+
+<!-- Progress Bar UI -->
+<div class="shipment-status-wrapper" style="margin-top: 30px">
+  <div class="shipment-steps">
+    <div class="step" id="step-pending">Pending</div>
+    <div class="step" id="step-hold">Hold</div>
+    <div class="step" id="step-transit">Transit</div>
+    <div class="step" id="step-editing">Editing</div>
+    <div class="step" id="step-delivered">Delivered</div>
+    <div class="step" id="step-location">Location</div>
+  </div>
+  <div class="shipment-progress-container">
+    <div class="shipment-progress-bar" id="progressBar"></div>
+  </div>
+</div>
+
+</body>
+
 
   <script src="js/edit-shipment.js"></script>
+  
+ <script>
+  function updateShipmentProgress(status) {
+    const progressBar = document.getElementById('progressBar');
+    const steps = {
+      pending:   { width: '10%', color: '#90ee90' },
+      hold:      { width: '25%', color: '#f39c12' },
+      transit:   { width: '45%', color: '#f1c40f' },
+      editing:   { width: '65%', color: '#e67e22' },
+      delivered: { width: '85%', color: '#2ecc71' },
+      location:  { width: '100%', color: '#006400' }
+    };
+
+    // Remove active from all steps
+    document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+
+    const key = status.toLowerCase();
+    if (steps[key]) {
+      progressBar.style.width = steps[key].width;
+      progressBar.style.backgroundColor = steps[key].color;
+
+      const stepElement = document.getElementById(`step-${key}`);
+      if (stepElement) stepElement.classList.add('active');
+    } else {
+      progressBar.style.width = '0%';
+      progressBar.style.backgroundColor = '#ccc';
+    }
+  }
+
+  // Optional: Load the current status when the page loads (if it's already set)
+  window.addEventListener('DOMContentLoaded', () => {
+    const status = document.getElementById('statusSelect')?.value;
+    if (status) updateShipmentProgress(status);
+  });
+</script>
+
+
+
 </body>
 </html>

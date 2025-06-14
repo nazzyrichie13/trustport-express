@@ -18,6 +18,45 @@
       .image-article img {
         display: none;
       }
+
+
+
+      .shipment-status-wrapper {
+  width: 100%;
+  max-width: 750px;
+  margin: auto;
+  font-family: sans-serif;
+}
+
+.shipment-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #888;
+}
+
+.step.active {
+  font-weight: bold;
+  color: #000;
+}
+
+.shipment-progress-container {
+  width: 100%;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+.shipment-progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: lightgreen;
+  transition: width 0.5s ease, background-color 0.5s ease;
+  border-radius: 15px;
+} 
     </style>
 </head>
 <body>
@@ -71,6 +110,20 @@
 
   <p id="errorMessage" style="color: red; margin-top: 10px;"></p>
 </div>
+<div class="shipment-status-wrapper">
+  <div class="shipment-steps">
+    <div class="step" id="step-pending">Pending</div>
+    <div class="step" id="step-hold">Hold</div>
+    <div class="step" id="step-transit">Transit</div>
+    <div class="step" id="step-editing">Editing</div>
+    <div class="step" id="step-delivered">Delivered</div>
+    <div class="step" id="step-location">Location</div>
+  </div>
+  <div class="shipment-progress-container">
+    <div class="shipment-progress-bar" id="progressBar"></div>
+  </div>
+</div>
+
 
     <div class="manageinput">
         <div class="manageclass" >
@@ -216,6 +269,18 @@ document.getElementById('reschedule-form').addEventListener('submit', async func
   const result = await response.json();
   alert(result.message);
 });
+
+
+
+  const trackingCode = 'ABC123'; // You should dynamically insert this from the backend
+
+  fetch(`/api/shipments/track/${trackingCode}`)
+    .then(res => res.json())
+    .then(data => {
+      updateShipmentProgress(data.status);
+    });
+
+
   
 
 </script>

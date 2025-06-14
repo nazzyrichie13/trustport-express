@@ -156,6 +156,25 @@ app.post('/reschedule', async (req, res) => {
     res.status(500).json({ message: 'Server error during reschedule' });
   }
 });
+// Update shipment (admin)
+app.post('/admin/update-shipment', async (req, res)  => {
+  try {
+    const { trackingCode, status } = req.body;
+
+    const shipment = await Shipment.findOne({ trackingCode });
+    if (!shipment) {
+      return res.status(404).send('Shipment not found');
+    }
+
+    shipment.status = status;
+    await shipment.save();
+
+    res.redirect('/admin/dashboard'); // Or wherever you want to go after update
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
 
 
 
