@@ -272,13 +272,21 @@ document.getElementById('reschedule-form').addEventListener('submit', async func
 
 
 
-  const trackingCode = 'ABC123'; // You should dynamically insert this from the backend
+   // You should dynamically insert this from the backend
 
-  fetch(`/api/shipments/track/${trackingCode}`)
-    .then(res => res.json())
-    .then(data => {
-      updateShipmentProgress(data.status);
-    });
+  fetch(`/api/shipments/track/${code}`)
+  .then(res => {
+    if (!res.ok) throw new Error('Failed to track shipment');
+    return res.json();
+  })
+  .then(data => {
+    updateShipmentProgress(data.status);
+  })
+  .catch(err => {
+    console.error('Tracking error:', err);
+    errorBox.textContent = 'Unable to update shipment progress.';
+  });
+
 
 
   
