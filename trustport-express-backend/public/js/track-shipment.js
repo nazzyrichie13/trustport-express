@@ -1,11 +1,11 @@
- const lastUpdate = new
-  Date( tracking.updateAt).toLocaleString('en-GB',{
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute:'2-digit'
-  });
+//  const lastUpdate = new
+//   Date( tracking.updateAt).toLocaleString('en-GB',{
+//     year: 'numeric',
+//     month: 'short',
+//     day: 'numeric',
+//     hour: '2-digit',
+//     minute:'2-digit'
+//   });
 
 document.getElementById('track-form').addEventListener('submit', async () => {
   
@@ -22,7 +22,7 @@ document.getElementById('track-form').addEventListener('submit', async () => {
       <strong>Status:</strong> ${data.status} <br />
       <strong>Location:</strong> ${data.currentLocation} <br />
       <strong>Recipient:</strong> ${data.recipientName} <br />
-      <stong> Updated:</strong>${lastUpdate} <br/>
+      <stong> Updated:</strong> ${data.expectedDeliveryDate} <br/>
     `;
   } catch (err) {
     resultBox.innerHTML = '<p>Shipment not found or error occurred.</p>';
