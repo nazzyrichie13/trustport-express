@@ -3,9 +3,18 @@ document.getElementById('loadBtn').addEventListener('click', async () => {
   const message = document.getElementById('message');
 
   try {
-    const res = await fetch(`/api/shipments/${trackingCode}`);
-    const data = await res.json();
 
+     const token = localStorage.getItem('token');
+
+  const res = await fetch(`/api/shipments/${trackingCode}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  const data = await res.json();
+
+   
     if (!res.ok) {
       message.textContent = data.message || 'Shipment not found';
       return;
