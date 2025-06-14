@@ -10,6 +10,7 @@ const http = require('http');
 const socketIO = require('socket.io');
 const adminAuthRoute = require('./routes/adminAuth');
 const adminRoutes = require('./routes/admin');
+const Shipment = require('./models/Shipment');
 
 
 
@@ -94,9 +95,15 @@ app.get('/api/chat/:userId', async (req, res) => {
   }
 });
 app.get('/api/shipments', async (req, res) => {
-  const shipments = await Shipment.find(); // or however you're retrieving shipments
-  res.json(shipments);
+  try {
+    const shipments = await Shipment.find();
+    res.json(shipments);
+  } catch (err) {
+    console.error('Error fetching shipments:', err.message);
+    res.status(500).json({ error: 'Failed to fetch shipments' });
+  }
 });
+
 
 
 
