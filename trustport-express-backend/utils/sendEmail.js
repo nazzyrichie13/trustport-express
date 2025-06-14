@@ -28,7 +28,7 @@ transporter.verify((error, success) => {
  */
 async function sendEmail({ to, subject, text, attachments = [] }) {
   try {
-    const info = await transporter.sendMail({
+    const info = await transporter.sendEmail({
       from: `"TrustPort Express" <${process.env.EMAIL_USER}>`,
       to,
       subject,
@@ -41,5 +41,13 @@ async function sendEmail({ to, subject, text, attachments = [] }) {
     console.error("❌ Failed to send email:", error.message);
   }
 }
+const sendEmailNotification = async (to, subject, text) => {
+  await transporter.sendMail({
+    from: '"TrustPort Admin" <no-reply@trustport.com>',
+    to,
+    subject,
+    text
+  });
+};
 
-module.exports = sendEmail;
+module.exports = sendEmailNotification,sendEmail;
