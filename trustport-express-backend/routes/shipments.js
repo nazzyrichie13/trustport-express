@@ -56,7 +56,7 @@ router.post('/create', verifyAdmin, async (req, res) => {
       packageWeight,
       packageDescription,
       pickupDate,
-      expectedDelivery: expectedDeliveryDate,
+      expectedDeliveryDate: expectedDeliveryDate,
       currentLocation
     });
 
