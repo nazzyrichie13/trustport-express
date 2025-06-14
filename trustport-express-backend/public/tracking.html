@@ -171,7 +171,7 @@
       document.getElementById('recipientName').textContent = data.recipientName || 'N/A';
       document.getElementById('status').textContent = data.status || 'N/A';
       document.getElementById('location').textContent = data.currentLocation || 'N/A';
-      document.getElementById('expectedDelivery').textContent = (data.expectedDelivery).toLocaleDateString() || 'N/A';
+      document.getElementById('expectedDeliveryDate').textContent = new Date(data.expectedDeliveryDate).toLocaleString|| 'N/A';
 
       resultBox.style.display = 'block';
     } catch (err) {
