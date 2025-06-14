@@ -191,6 +191,27 @@ app.post('/admin/update-shipment', async (req, res)  => {
     res.status(500).send('Server error');
   }
 });
+app.patch('/api/shipments/:trackingCode', async (req, res) => {
+  try {
+    const { trackingCode } = req.params;
+    const updates = req.body;
+
+    const updatedShipment = await Shipment.findOneAndUpdate(
+      { trackingCode },
+      { $set: updates },
+      { new: true }
+    );
+
+    if (!updatedShipment) {
+      return res.status(404).json({ message: 'Shipment not found' });
+    }
+
+    res.json({ message: 'Shipment updated successfully', shipment: updatedShipment });
+  } catch (err) {
+    console.error('Error updating shipment:', err.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 
 
