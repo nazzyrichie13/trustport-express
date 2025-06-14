@@ -86,19 +86,13 @@
 
 
 <!-- Progress Bar UI -->
-<div class="shipment-status-wrapper" style="margin-top: 30px">
-  <div class="shipment-steps">
-    <div class="step" id="step-pending">Pending</div>
-    <div class="step" id="step-hold">Hold</div>
-    <div class="step" id="step-transit">Transit</div>
-    <div class="step" id="step-editing">Editing</div>
-    <div class="step" id="step-delivered">Delivered</div>
-    <div class="step" id="step-location">Location</div>
-  </div>
-  <div class="shipment-progress-container">
-    <div class="shipment-progress-bar" id="progressBar"></div>
+<div id="shipment-progress" style="margin-top: 1rem;">
+  <div id="shipment-progress-text">Current Status: N/A</div>
+  <div style="background: #eee; border-radius: 4px; overflow: hidden; height: 20px; margin-top: 5px;">
+    <div id="shipment-progress-bar" style="height: 100%; background: #28a745; color: white; text-align: center; transition: width 0.5s;">0%</div>
   </div>
 </div>
+
 
 </body>
 
@@ -106,32 +100,39 @@
   <script src="js/edit-shipment.js"></script>
   
  <script>
-  function updateShipmentProgress(status) {
-    const progressBar = document.getElementById('progressBar');
-    const steps = {
-      pending:   { width: '10%', color: '#90ee90' },
-      hold:      { width: '25%', color: '#f39c12' },
-      transit:   { width: '45%', color: '#f1c40f' },
-      editing:   { width: '65%', color: '#e67e22' },
-      delivered: { width: '85%', color: '#2ecc71' },
-      location:  { width: '100%', color: '#006400' }
-    };
+ 
 
-    // Remove active from all steps
-    document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+    function updateShipmentProgress(status) {
+  const progressText = document.getElementById('shipment-progress-text');
+  const progressBar = document.getElementById('shipment-progress-bar');
 
-    const key = status.toLowerCase();
-    if (steps[key]) {
-      progressBar.style.width = steps[key].width;
-      progressBar.style.backgroundColor = steps[key].color;
+  if (!progressText || !progressBar) return;
 
-      const stepElement = document.getElementById(`step-${key}`);
-      if (stepElement) stepElement.classList.add('active');
-    } else {
-      progressBar.style.width = '0%';
-      progressBar.style.backgroundColor = '#ccc';
-    }
+  progressText.textContent = `Current Status: ${status}`;
+
+  let progress = 0;
+
+  switch (status.toLowerCase()) {
+    case 'processing':
+      progress = 25;
+      break;
+    case 'in transit':
+      progress = 50;
+      break;
+    case 'out for delivery':
+      progress = 75;
+      break;
+    case 'delivered':
+      progress = 100;
+      break;
+    default:
+      progress = 10;
   }
+
+  progressBar.style.width = `${progress}%`;
+  progressBar.textContent = `${progress}%`;
+}
+
 
   // Optional: Load the current status when the page loads (if it's already set)
   window.addEventListener('DOMContentLoaded', () => {

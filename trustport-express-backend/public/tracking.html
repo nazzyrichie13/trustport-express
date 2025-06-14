@@ -109,7 +109,14 @@
   </div>
 
   <p id="errorMessage" style="color: red; margin-top: 10px;"></p>
+  <div id="shipment-progress" style="margin-top: 1rem;">
+  <div id="shipment-progress-text">Current Status: N/A</div>
+  <div style="background: #eee; border-radius: 4px; overflow: hidden; height: 20px; margin-top: 5px;">
+    <div id="shipment-progress-bar" style="height: 100%; background: #28a745; color: white; text-align: center; transition: width 0.5s;">0%</div>
+  </div>
 </div>
+
+<!-- </div>
 <div class="shipment-status-wrapper">
   <div class="shipment-steps">
     <div class="step" id="step-pending">Pending</div>
@@ -122,7 +129,7 @@
   <div class="shipment-progress-container">
     <div class="shipment-progress-bar" id="progressBar"></div>
   </div>
-</div>
+</div> -->
 
 
     <div class="manageinput">
@@ -285,6 +292,37 @@
       console.error(err);
     }
   });
+  function updateShipmentProgress(status) {
+  const progressText = document.getElementById('shipment-progress-text');
+  const progressBar = document.getElementById('shipment-progress-bar');
+
+  if (!progressText || !progressBar) return;
+
+  progressText.textContent = `Current Status: ${status}`;
+
+  let progress = 0;
+
+  switch (status.toLowerCase()) {
+    case 'processing':
+      progress = 25;
+      break;
+    case 'in transit':
+      progress = 50;
+      break;
+    case 'out for delivery':
+      progress = 75;
+      break;
+    case 'delivered':
+      progress = 100;
+      break;
+    default:
+      progress = 10;
+  }
+
+  progressBar.style.width = `${progress}%`;
+  progressBar.textContent = `${progress}%`;
+}
+
 </script>
 
 <!-- Other scripts -->

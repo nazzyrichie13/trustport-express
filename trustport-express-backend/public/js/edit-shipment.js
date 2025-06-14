@@ -70,3 +70,5 @@ const res = await fetch(`/api/shipments/${trackingCode}`, {
     message.textContent = 'Error updating shipment';
   }
 });
+
+
