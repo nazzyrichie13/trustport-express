@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         <strong>Tracking:</strong> ${shipment.trackingCode} <br />
         <strong>Recipient:</strong> ${shipment.recipientName} <br />
         <strong>Status:</strong> ${shipment.status} <br />
-        <strong>Location:</strong> ${shipment.location} <br />
+        <strong>Location:</strong> ${shipment.currentLocation} <br />
         <hr />
       `;
       container.appendChild(div);
