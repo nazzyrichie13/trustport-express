@@ -11,6 +11,9 @@ const socketIO = require('socket.io');
 const adminAuthRoute = require('./routes/adminAuth');
 const adminRoutes = require('./routes/admin');
 const Shipment = require('./models/Shipment');
+const sendEmail = require('../utils/sendEmail');
+const generatePDF = require('../utils/generatePDF'); // PDF utility
+const fs = require('fs');
 
 
 
@@ -101,6 +104,54 @@ app.get('/api/shipments', async (req, res) => {
   } catch (err) {
     console.error('Error fetching shipments:', err.message);
     res.status(500).json({ error: 'Failed to fetch shipments' });
+  }
+});
+
+
+
+router.post('/reschedule', async (req, res) => {
+  try {
+    const { trackingCode, newDeliveryDate, newDeliveryAddress, userEmail } = req.body;
+
+    if (!trackingCode || (!newDeliveryDate && !newDeliveryAddress)) {
+      return res.status(400).json({ message: 'Tracking code and at least one field (date or address) are required.' });
+    }
+
+    const shipment = await Shipment.findOne({ trackingCode });
+    if (!shipment) return res.status(404).json({ message: 'Shipment not found' });
+
+    if (newDeliveryDate) shipment.estimatedDelivery = newDeliveryDate;
+    if (newDeliveryAddress) shipment.recipient.address = newDeliveryAddress;
+
+    shipment.status = 'Rescheduled';
+    await shipment.save();
+
+    // ✅ Generate PDF
+    const pdfBuffer = await generatePDF({
+      title: 'Rescheduled Shipment Receipt',
+      shipment,
+    });
+
+    // ✅ Email to user
+    await sendEmail({
+      to: userEmail,
+      subject: `Your shipment has been rescheduled (${trackingCode})`,
+      text: `Hi ${shipment.recipient.name}, your shipment has been rescheduled.`,
+      attachments: [{ filename: 'reschedule_receipt.pdf', content: pdfBuffer }],
+    });
+
+    // ✅ Notify Admin
+    await sendEmail({
+      to: 'youngnazzy13@gmail.com',
+      subject: 'Shipment Rescheduled Notification',
+      text: `Tracking code ${trackingCode} has been rescheduled by the user.`,
+      attachments: [{ filename: 'reschedule_receipt.pdf', content: pdfBuffer }],
+    });
+
+    res.json({ message: 'Reschedule successful. Confirmation sent to your email.', shipment });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error during reschedule' });
   }
 });
 

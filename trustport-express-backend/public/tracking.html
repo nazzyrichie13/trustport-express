@@ -87,9 +87,19 @@
         
             
             <i class="fa-solid fa-calendar" style="font-size: 45px;"></i>
-            <a href="track.html">SCHEDULE PICKUP</a>
+            <button onclick="showReschedule()">Reschedule Delivery</button>
         </div>
     </div>
+    <div id="reschedule-modal" style="display:none;">
+  <form id="reschedule-form">
+    <input type="text" name="trackingCode" placeholder="Tracking Code" required />
+    <input type="date" name="newDeliveryDate" />
+    <input type="text" name="newDeliveryAddress" placeholder="New Address" />
+    <input type="email" name="userEmail" placeholder="Your Email" required />
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
     
 <div id="chat-toggle" style="position: fixed; bottom: 20px; right: 20px; cursor: pointer;">
   <i class="fas fa-paper-plane fa-2x"></i>

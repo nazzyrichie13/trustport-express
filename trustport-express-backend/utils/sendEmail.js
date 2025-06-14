@@ -38,4 +38,15 @@ transporter.verify((error, success) => {
     console.log("✅ SMTP server is ready to send emails");
   }
 });
+async function sendEmail({ to, subject, text, attachments }) {
+  await transporter.sendMail({
+    from: `"TrustPort Express" <${process.env.EMAIL_USER}>`,
+    to,
+    subject,
+    text,
+    attachments,
+  });
+}
+
+module.exports = sendEmail;
 
