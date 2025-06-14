@@ -23,6 +23,14 @@ module.exports = async function sendEmail(to, subject, text) {
     console.error("❌ Failed to send email:", error.message);
   }
 };
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
 transporter.verify((error, success) => {
   if (error) {
     console.error("❌ SMTP connection error:", error);
@@ -30,3 +38,4 @@ transporter.verify((error, success) => {
     console.log("✅ SMTP server is ready to send emails");
   }
 });
+
