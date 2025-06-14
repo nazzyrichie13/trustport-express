@@ -12,7 +12,7 @@ const adminAuthRoute = require('./routes/adminAuth');
 const adminRoutes = require('./routes/admin');
 const Shipment = require('./models/Shipment');
 const sendEmail = require('./utils/sendEmail');
-const generatePDF = require('../utils/generatePDF'); // PDF utility
+const generatePDF = require('./utils/generatePDF'); // PDF utility
 const fs = require('fs');
 
 
