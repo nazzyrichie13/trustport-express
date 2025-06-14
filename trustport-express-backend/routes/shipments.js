@@ -112,7 +112,7 @@ router.post('/create', verifyAdmin, async (req, res) => {
       ['Package Weight:', `${shipment.packageWeight} kg`],
       ['Package Description:', shipment.packageDescription],
       ['Pickup Date:', new Date(shipment.pickupDate).toLocaleDateString()],
-      ['Expected Delivery:', new Date(shipment.expectedDelivery).toLocaleDateString()],
+      ['Expected Delivery:', new Date(shipment.expectedDeliveryDate).toLocaleDateString()],
       ['Current Location:', shipment.currentLocation],
       ['Created At:', new Date(shipment.createdAt).toLocaleString()]
     ];

@@ -108,50 +108,56 @@
     const messageDiv = document.getElementById('message');
 
     form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+  e.preventDefault();
 
-      const formData = {
-        
-        senderName: form.senderName.value.trim(),
-        recipientName: form.recipientName.value.trim(),
-        senderPhone: form.senderPhone.value.trim(),
-        recipientPhone: form.recipientPhone.value.trim(),
-        address: form.address.value.trim(),
-        email: form.email.value.trim(),
-        status: form.status.value,
-        shipmentType: form.shipmentType.value,
-        packageWeight: parseFloat(form.packageWeight.value),
-        packageDescription: form.packageDescription.value.trim(),
-        pickupDate: form.pickupDate.value,
-        expectedDeliveryDate: form.expectedDeliveryDate.value,
-        currentLocation: form.currentLocation.value.trim()
-      };
+  if (!form.expectedDeliveryDate.value) {
+    messageDiv.style.color = 'red';
+    messageDiv.textContent = 'Expected Delivery Date is required.';
+    return;
+  }
 
-      try {
-        const res = await fetch('/api/shipments/create', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
-          },
-          body: JSON.stringify(formData),
-        });
+  const formData = {
+    senderName: form.senderName.value.trim(),
+    recipientName: form.recipientName.value.trim(),
+    senderPhone: form.senderPhone.value.trim(),
+    recipientPhone: form.recipientPhone.value.trim(),
+    address: form.address.value.trim(),
+    email: form.email.value.trim(),
+    status: form.status.value,
+    shipmentType: form.shipmentType.value,
+    packageWeight: parseFloat(form.packageWeight.value),
+    packageDescription: form.packageDescription.value.trim(),
+    pickupDate: form.pickupDate.value,
+    expectedDeliveryDate: form.expectedDeliveryDate.value,
+    currentLocation: form.currentLocation.value.trim()
+  };
 
-        const data = await res.json();
-
-        if (res.ok) {
-          messageDiv.style.color = 'green';
-          messageDiv.textContent = data.message || 'Shipment created successfully!';
-          form.reset();
-        } else {
-          messageDiv.style.color = 'red';
-          messageDiv.textContent = data.message || 'Failed to create shipment.';
-        }
-      } catch (err) {
-        messageDiv.style.color = 'red';
-        messageDiv.textContent = 'Error: ' + err.message;
-      }
+  try {
+    const res = await fetch('https://trustport-express.onrender.com/api/shipments/create', { // ← Use your actual Render backend URL here
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+      },
+      body: JSON.stringify(formData),
     });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      messageDiv.style.color = 'green';
+      messageDiv.textContent = data.message || 'Shipment created successfully!';
+      form.reset();
+    } else {
+      messageDiv.style.color = 'red';
+      messageDiv.textContent = data.message || 'Failed to create shipment.';
+    }
+  } catch (err) {
+    messageDiv.style.color = 'red';
+    messageDiv.textContent = 'Error: ' + err.message;
+  }
+});
+
   </script>
 </body>
 </html>
