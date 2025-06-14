@@ -193,6 +193,29 @@
     const box = document.getElementById('chat-box');
     box.style.display = box.style.display === 'none' ? 'block' : 'none';
   }
+  function showReschedule() {
+  document.getElementById('reschedule-modal').style.display = 'block';
+}
+
+document.getElementById('reschedule-form').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  const formData = new FormData(this);
+  const data = {
+    trackingCode: formData.get('trackingCode'),
+    newDeliveryDate: formData.get('newDeliveryDate'),
+    newDeliveryAddress: formData.get('newDeliveryAddress'),
+    userEmail: formData.get('userEmail'),
+  };
+
+  const response = await fetch('/api/user/reschedule', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  const result = await response.json();
+  alert(result.message);
+});
   
 
 </script>
