@@ -202,14 +202,15 @@
             </div>
            
         </footer>
-        <script>
-  
+       
+
+<script>
   const trackForm = document.getElementById('track-form');
   const resultBox = document.getElementById('track-result');
   const errorBox = document.getElementById('errorMessage');
 
   trackForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
     const code = document.getElementById('trackingCode').value.trim();
     resultBox.style.display = 'none';
@@ -229,75 +230,68 @@
         return;
       }
 
+      // Fill in tracking result
       document.getElementById('trackCode').textContent = data.trackingCode;
       document.getElementById('senderName').textContent = data.senderName || 'N/A';
       document.getElementById('recipientName').textContent = data.recipientName || 'N/A';
       document.getElementById('status').textContent = data.status || 'N/A';
       document.getElementById('location').textContent = data.currentLocation || 'N/A';
       document.getElementById('expectedDeliveryDate').textContent = data.expectedDeliveryDate || 'N/A';
-      
 
+      // Show shipment result
       resultBox.style.display = 'block';
+
+      // ✅ Update shipment progress from the same data
+      updateShipmentProgress(data.status);
     } catch (err) {
+      console.error('Tracking error:', err);
       errorBox.textContent = 'Error tracking shipment.';
     }
   });
+
+  // Toggle chat box
   document.getElementById('chat-toggle').onclick = function () {
     const box = document.getElementById('chat-box');
     box.style.display = box.style.display === 'none' ? 'block' : 'none';
   }
+
+  // Show reschedule modal
   function showReschedule() {
-  document.getElementById('reschedule-modal').style.display = 'block';
-}
+    document.getElementById('reschedule-modal').style.display = 'block';
+  }
 
-document.getElementById('reschedule-form').addEventListener('submit', async function (e) {
-  e.preventDefault();
-  const formData = new FormData(this);
-  const data = {
-    trackingCode: formData.get('trackingCode'),
-    newDeliveryDate: formData.get('newDeliveryDate'),
-    newDeliveryAddress: formData.get('newDeliveryAddress'),
-    userEmail: formData.get('userEmail'),
-  };
+  // Handle reschedule form submission
+  document.getElementById('reschedule-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const data = {
+      trackingCode: formData.get('trackingCode'),
+      newDeliveryDate: formData.get('newDeliveryDate'),
+      newDeliveryAddress: formData.get('newDeliveryAddress'),
+      userEmail: formData.get('userEmail'),
+    };
 
-  const response = await fetch('/api/user/reschedule', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+    try {
+      const response = await fetch('/api/user/reschedule', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      alert(result.message);
+    } catch (err) {
+      alert('Error rescheduling shipment.');
+      console.error(err);
+    }
   });
-
-  const result = await response.json();
-  alert(result.message);
-});
-
-
-
-   // You should dynamically insert this from the backend
-
-  fetch(`/api/shipments/track/${code}`)
-  .then(res => {
-    if (!res.ok) throw new Error('Failed to track shipment');
-    return res.json();
-  })
-  .then(data => {
-    updateShipmentProgress(data.status);
-  })
-  .catch(err => {
-    console.error('Tracking error:', err);
-    errorBox.textContent = 'Unable to update shipment progress.';
-  });
-
-
-
-  
-
 </script>
 
-    
-        <script src="js/index.js"></script>
-        <!-- <script src="js/track-shipment.js"></script> -->
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="js/chat.js"></script>
-    
+<!-- Other scripts -->
+<script src="js/index.js"></script>
+<!-- <script src="js/track-shipment.js"></script> -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/chat.js"></script>
+
 </body>
 </html>
