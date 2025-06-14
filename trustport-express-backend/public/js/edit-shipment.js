@@ -4,7 +4,8 @@ document.getElementById('loadBtn').addEventListener('click', async () => {
 
   try {
 
-     const token = localStorage.getItem('token');
+     const token = localStorage.getItem('adminToken');
+
 
   const res = await fetch(`/api/shipments/${trackingCode}`, {
     headers: {
@@ -45,7 +46,8 @@ document.getElementById('editForm').addEventListener('submit', async (e) => {
   };
 
   try {
-    const token = localStorage.getItem('token'); // get your saved token
+    const token = localStorage.getItem('adminToken');
+ // get your saved token
 
 const res = await fetch(`/api/shipments/${trackingCode}`, {
   method: 'PATCH',
