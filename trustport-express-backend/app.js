@@ -93,6 +93,11 @@ app.get('/api/chat/:userId', async (req, res) => {
     res.status(500).json({ error: 'Error fetching messages' });
   }
 });
+app.get('/api/shipments', async (req, res) => {
+  const shipments = await Shipment.find(); // or however you're retrieving shipments
+  res.json(shipments);
+});
+
 
 
 module.exports = socketHandler;
